@@ -10,7 +10,8 @@
 		"Other"
 	],
 	"activationEvents": [
-        "onCommand:hacknews.helloWorld"
+        "onCommand:hacknews.helloWorld",
+				"onCommand:hacknews.nihao"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
@@ -18,6 +19,10 @@
 			{
 				"command": "hacknews.helloWorld",
 				"title": "Hello World"
+			},
+			{
+				"command": "hacknews.nihao",
+				"title": "Nihao"
 			}
 		]
 	},
