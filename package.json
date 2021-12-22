@@ -33,7 +33,11 @@
 				},
 				{
 					"id": "hacknews-job",
-					"name": "工作"
+					"name": "Job"
+				},
+				{
+					"id": "hacknews-user",
+					"name": "User"
 				}
 			]
 		},
