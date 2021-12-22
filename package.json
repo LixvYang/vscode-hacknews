@@ -11,10 +11,32 @@
 	],
 	"activationEvents": [
         "onCommand:hacknews.helloWorld",
-				"onCommand:hacknews.nihao"
+				"onCommand:hacknews.nihao",
+				"onView:vscode-hacknews"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
+		"viewsContainers": {
+			"activitybar": [
+				{
+					"id": "vscode-hacknews",
+					"title": "黑客新闻",
+					"icon": "res/media/hacknews.svg"
+				}
+			]
+		},
+		"views": {
+			"vscode-hacknews": [
+				{
+					"id": "hacknews-topStories",
+					"name": "TopStories"
+				},
+				{
+					"id": "hacknews-job",
+					"name": "工作"
+				}
+			]
+		},
 		"commands": [
 			{
 				"command": "hacknews.helloWorld",
