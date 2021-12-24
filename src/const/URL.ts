@@ -1,5 +1,5 @@
 // base API for hacknews
-const BaseAPI = `https://hacker-news.firebaseio.com/v0/`;
+export const BaseAPI = `https://hacker-news.firebaseio.com/v0/`;
 
 // 
 export const TopStoriesAPI = BaseAPI + `topstories.json`;
