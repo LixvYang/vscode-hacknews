@@ -47,12 +47,7 @@ export class TopsStoriesTreeViewProvider implements vscode.TreeDataProvider<Hack
   }
 
   getChildren(element?: HacknewsTreeItem): Thenable<HacknewsTreeItem[]> {
-    if (element) {
-      return new Promise(async (resolve, reject) => {
-        let topStoriesAPI = `${TopStoriesAPI}`;
-        
-      })
-    }
+    
   }
 }
 
