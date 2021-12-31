@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 import { TopStoriesAPI } from '../const/URL';
+import { ITopStoriesTarget } from '../target/topStories'
 
 export class TopStorieTreeItem extends vscode.TreeItem {
   constructor(
@@ -15,7 +16,7 @@ export class HacknewsTreeItem extends TopStorieTreeItem {
     public type: string,
     public readonly collapsibleState: vscode.TreeItemCollapsibleState,
     public readonly command?: vscode.Command,
-    public topstories?: ITopStories,
+    public topstories?: ITopStoriesTarget,
     public page?: number,
   ) {
     super(label, collapsibleState, topstories && topstories.url ? topstories.url : '');
@@ -48,16 +49,4 @@ export class TopsStoriesTreeViewProvider implements vscode.TreeDataProvider<Hack
   getChildren(element?: HacknewsTreeItem): Thenable<HacknewsTreeItem[]> {
     
   }
-}
-
-export interface ITopStories {
-  by?:          string;
-  descendants?: number;
-  id?:          number;
-  kids?:        number[];
-  score?:       number;
-  time?:        number;
-  title?:       string;
-  type?:        string;
-  url?:         string;
 }
