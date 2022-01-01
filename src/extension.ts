@@ -3,6 +3,8 @@
 import * as vscode from 'vscode';
 import { Output } from './global/logger';
 import { TopStoriesTreeProvider } from './treeview/topStories-treeview-provider';
+import { createWebView } from './service/webview.service';
+import { TopStoriesTreeItem } from './treeview/topStories-treeview-provider';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -30,7 +32,12 @@ export function activate(context: vscode.ExtensionContext) {
 		topStoriesTreeViewProvider
 	)
 
-	vscode.commands.registerCommand('HackNews.refresh-topStories', () => {
+	vscode.commands.registerCommand('hacknews.refreshTopStories', () => {
     topStoriesTreeViewProvider.refresh();
   });
+
+	context.subscriptions.push(vscode.commands.registerCommand('hacknews.treeItemClick', (rank:TopStoriesTreeItem) => {
+		const webView = createWebView(context, vscode.ViewColumn.Active, rank);
+		context.subscriptions.push(webView);
+	}));
 }

@@ -12,8 +12,10 @@
   "activationEvents": [
     "onCommand:hacknews.helloWorld",
     "onCommand:hacknews.nihao",
+    "onCommand:hacknews.treeItemClick",
     "onView:vscode-hacknews",
-    "onView:hacknews-topStories"
+    "onView:hacknews-topStories",
+    "onView:rank"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -21,7 +23,7 @@
       "activitybar": [
         {
           "id": "vscode-hacknews",
-          "title": "黑客新闻",
+          "title": "Hacker News",
           "icon": "res/media/hacknews.svg"
         }
       ]
@@ -52,8 +54,8 @@
         "title": "Nihao"
       },
       {
-        "command": "HackNews.refresh-topStories",
-        "title": "刷新",
+        "command": "hacknews.refreshTopStories",
+        "title": "Refresh",
         "icon": {
           "light": "res/media/light/refresh.svg",
           "dark": "res/media/dark/refresh.svg"
@@ -63,9 +65,15 @@
     "menus": {
       "view/title":[
         {
-          "command": "HackNews.refresh-topStories",
+          "command": "hacknews.refreshTopStories",
           "when": "view == hacknews-topStories",
           "group": "navigation"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "hacknews.treeItemClick",
+          "when": "view == hacknews-topStories && viewItem == vscode-hacknews"
         }
       ]
     }

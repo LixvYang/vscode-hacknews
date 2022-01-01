@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import { ITopStoriesArticle } from '../target/topStories'
 import { TopStories } from '../service/topstory.service';
+import * as os from 'os';
 
 
 export class TopStoriesTreeProvider implements vscode.TreeDataProvider<TopStoriesTreeItem> {
@@ -47,14 +48,11 @@ export class TopStoriesTreeProvider implements vscode.TreeDataProvider<TopStorie
     }
     return tree;
   }
-
-
-
 }
 
 export class TopStoriesTreeItem extends vscode.TreeItem {
   constructor(
-    label: string,
+    label: any,
     children?: TopStoriesTreeItem[]
   ) {
     super(label, children === undefined ? vscode.TreeItemCollapsibleState.None : vscode.TreeItemCollapsibleState.Collapsed);
@@ -62,5 +60,11 @@ export class TopStoriesTreeItem extends vscode.TreeItem {
   }
 
   children?: TopStoriesTreeItem[];
+
+  get url(): string {
+    
+			return this.url;
+		
+  }
 }
 
