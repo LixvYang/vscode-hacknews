@@ -1,76 +1,79 @@
 {
   "name": "hacknews",
-	"displayName": "vsocde-hacknews",
-	"description": "hacknews extentions built on vscode",
-	"version": "0.0.1",
-	"engines": {
-		"vscode": "^1.63.0"
-	},
-	"categories": [
-		"Other"
-	],
-	"activationEvents": [
-        "onCommand:hacknews.helloWorld",
-				"onCommand:hacknews.nihao",
-				"onView:vscode-hacknews"
-	],
-	"main": "./out/extension.js",
-	"contributes": {
-		"viewsContainers": {
-			"activitybar": [
-				{
-					"id": "vscode-hacknews",
-					"title": "黑客新闻",
-					"icon": "res/media/hacknews.svg"
-				}
-			]
-		},
-		"views": {
-			"vscode-hacknews": [
-				{
-					"id": "hacknews-topStories",
-					"name": "TopStories"
-				},
-				{
-					"id": "hacknews-job",
-					"name": "Job"
-				},
-				{
-					"id": "hacknews-user",
-					"name": "User"
-				}
-			]
-		},
-		"commands": [
-			{
-				"command": "hacknews.helloWorld",
-				"title": "Hello World"
-			},
-			{
-				"command": "hacknews.nihao",
-				"title": "Nihao"
-			}
-		]
-	},
-	"scripts": {
-		"vscode:prepublish": "npm run compile",
-		"compile": "tsc -p ./",
-		"watch": "tsc -watch -p ./",
-		"pretest": "npm run compile && npm run lint",
-		"lint": "eslint src --ext ts",
-		"test": "node ./out/test/runTest.js"
-	},
-	"devDependencies": {
-		"@types/vscode": "^1.63.0",
-		"@types/glob": "^7.1.4",
-		"@types/mocha": "^9.0.0",
-		"@types/node": "14.x",
-		"@typescript-eslint/eslint-plugin": "^5.1.0",
-		"@typescript-eslint/parser": "^5.1.0",
-		"eslint": "^8.1.0",
-		"glob": "^7.1.7",
-		"mocha": "^9.1.3",
-		"typescript": "^4.4.4",
-		"@vscode/test-electron": "^1.6.2"
-	}
+  "displayName": "vsocde-hacknews",
+  "description": "hacknews extentions built on vscode",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.63.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:hacknews.helloWorld",
+    "onCommand:hacknews.nihao",
+    "onView:vscode-hacknews"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "vscode-hacknews",
+          "title": "黑客新闻",
+          "icon": "res/media/hacknews.svg"
+        }
+      ]
+    },
+    "views": {
+      "vscode-hacknews": [
+        {
+          "id": "hacknews-topStories",
+          "name": "TopStories"
+        },
+        {
+          "id": "hacknews-job",
+          "name": "Job"
+        },
+        {
+          "id": "hacknews-user",
+          "name": "User"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "hacknews.helloWorld",
+        "title": "Hello World"
+      },
+      {
+        "command": "hacknews.nihao",
+        "title": "Nihao"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.1.4",
+    "@types/mocha": "^9.0.0",
+    "@types/node": "14.x",
+    "@types/vscode": "^1.63.0",
+    "@typescript-eslint/eslint-plugin": "^5.1.0",
+    "@typescript-eslint/parser": "^5.1.0",
+    "@vscode/test-electron": "^1.6.2",
+    "eslint": "^8.1.0",
+    "glob": "^7.1.7",
+    "mocha": "^9.1.3",
+    "typescript": "^4.4.4"
+  },
+  "dependencies": {
+    "axios": "^0.24.0"
+  }
 }
