@@ -12,7 +12,8 @@
   "activationEvents": [
     "onCommand:hacknews.helloWorld",
     "onCommand:hacknews.nihao",
-    "onView:vscode-hacknews"
+    "onView:vscode-hacknews",
+    "onView:hacknews-topStories"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -49,8 +50,25 @@
       {
         "command": "hacknews.nihao",
         "title": "Nihao"
+      },
+      {
+        "command": "HackNews.refresh-topStories",
+        "title": "刷新",
+        "icon": {
+          "light": "res/media/light/refresh.svg",
+          "dark": "res/media/dark/refresh.svg"
+        }
       }
-    ]
+    ],
+    "menus": {
+      "view/title":[
+        {
+          "command": "HackNews.refresh-topStories",
+          "when": "view == hacknews-topStories",
+          "group": "navigation"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",

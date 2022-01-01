@@ -2,6 +2,7 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 import { Output } from './global/logger';
+import { TopStoriesTreeProvider } from './treeview/topStories-treeview-provider';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -21,4 +22,15 @@ export function activate(context: vscode.ExtensionContext) {
 	vscode.commands.registerCommand('hacknews.nihao', () => {
 		vscode.window.showInformationMessage("你好!");
 	});
+
+	const topStoriesTreeViewProvider = new TopStoriesTreeProvider();
+
+	vscode.window.registerTreeDataProvider(
+		"hacknews-topStories",
+		topStoriesTreeViewProvider
+	)
+
+	vscode.commands.registerCommand('HackNews.refresh-topStories', () => {
+    topStoriesTreeViewProvider.refresh();
+  });
 }

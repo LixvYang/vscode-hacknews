@@ -1,52 +1,66 @@
 import * as vscode from 'vscode';
-import { TopStoriesAPI } from '../const/URL';
-import { ITopStoriesTarget } from '../target/topStories'
-
-export class TopStorieTreeItem extends vscode.TreeItem {
-  constructor(
-    public readonly label: string,
-    public collapsibleState: vscode.TreeItemCollapsibleState,
-    public link: string | undefined 
-  ) { super(label, collapsibleState) }
-}
-
-export class HacknewsTreeItem extends TopStorieTreeItem {
-  constructor(
-    public readonly label: string,
-    public type: string,
-    public readonly collapsibleState: vscode.TreeItemCollapsibleState,
-    public readonly command?: vscode.Command,
-    public topstories?: ITopStoriesTarget,
-    public page?: number,
-  ) {
-    super(label, collapsibleState, topstories && topstories.url ? topstories.url : '');
-  }
-
-  get tooltip(): string {
-    return this.topstories && this.topstories.title ? this.topstories.title : '';
-  }
-
-  get description(): string {
-    return this.topstories && this.topstories.title ? this.topstories.title : '';
-  }
-}
-
-export class TopsStoriesTreeViewProvider implements vscode.TreeDataProvider<HacknewsTreeItem> {
-  private _onDidChangeTreeData: vscode.EventEmitter<HacknewsTreeItem | undefined> = new vscode.EventEmitter<HacknewsTreeItem | undefined>();
-	readonly onDidChangeTreeData: vscode.Event<HacknewsTreeItem | undefined> = this._onDidChangeTreeData.event;
+import { ITopStoriesArticle } from '../target/topStories'
+import { TopStories } from '../service/topstory.service';
 
 
-  constructor() {}
+export class TopStoriesTreeProvider implements vscode.TreeDataProvider<TopStoriesTreeItem> {
+  private _onDidChangeTreeData: vscode.EventEmitter<TopStoriesTreeItem | undefined> = new vscode.EventEmitter<TopStoriesTreeItem | undefined>();
+	readonly onDidChangeTreeData: vscode.Event<TopStoriesTreeItem | undefined> = this._onDidChangeTreeData.event;
 
-  refresh(node?: HacknewsTreeItem): void {
-    this._onDidChangeTreeData.fire(node)
-  }
+	constructor() {}
+  private articleList: ITopStoriesArticle[] = [];
 
-  getTreeItem(element: HacknewsTreeItem): vscode.TreeItem | Thenable<vscode.TreeItem> {
+  getTreeItem(element: TopStoriesTreeItem): TopStoriesTreeItem | Thenable<TopStoriesTreeItem> {
     return element;
   }
 
-  getChildren(element?: HacknewsTreeItem): Thenable<HacknewsTreeItem[]> {
-    
+  async getChildren(element?: TopStoriesTreeItem): Promise<TopStoriesTreeItem[] | undefined> {
+    if (element === undefined) {
+      this.articleList = await TopStories.getTopStories();
+      return this.topStoryArticleTree(this.articleList);
+    } 
+    return Promise.resolve(element.children);
   }
+
+  refresh(): void {
+    this._onDidChangeTreeData.fire(undefined);
+  }  
+  
+  async topStoryArticleTree(articles: ITopStoriesArticle[]): Promise<TopStoriesTreeItem[]> {
+    let tree: TopStoriesTreeItem[] = [];
+    for (const article of articles) {
+      const url = article.url;
+
+      const childNode: TopStoriesTreeItem = new TopStoriesTreeItem(`${article.descendants} comments`);
+      childNode.iconPath = new vscode.ThemeIcon('comment-discussion');
+
+      const treeNode: TopStoriesTreeItem = new TopStoriesTreeItem(article.title, [childNode]);
+      treeNode.tooltip = `${article.title} - ${url}`;
+      treeNode.description = `${url}`;
+      treeNode.command = {
+        command: 'hack-news.openArticle',
+        title: 'Open Article',
+        arguments: [url, article.id],
+      };
+      tree.push(treeNode);
+    
+    }
+    return tree;
+  }
+
+
+
 }
+
+export class TopStoriesTreeItem extends vscode.TreeItem {
+  constructor(
+    label: string,
+    children?: TopStoriesTreeItem[]
+  ) {
+    super(label, children === undefined ? vscode.TreeItemCollapsibleState.None : vscode.TreeItemCollapsibleState.Collapsed);
+    this.children = children;
+  }
+
+  children?: TopStoriesTreeItem[];
+}
+
