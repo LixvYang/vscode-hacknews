@@ -10,8 +10,6 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:hacknews.helloWorld",
-    "onCommand:hacknews.nihao",
     "onCommand:hacknews.treeItemClick",
     "onView:vscode-hacknews",
     "onView:hacknews-topStories",
@@ -45,14 +43,6 @@
       ]
     },
     "commands": [
-      {
-        "command": "hacknews.helloWorld",
-        "title": "Hello World"
-      },
-      {
-        "command": "hacknews.nihao",
-        "title": "Nihao"
-      },
       {
         "command": "hacknews.refreshTopStories",
         "title": "Refresh",
