@@ -17,7 +17,7 @@ export function createWebView(
         webviewPanel = window.createWebviewPanel(
 
             'webView',                       
-            rank.label,                           
+            "你好",                           
             viewColumn,                         
             {
                 retainContextWhenHidden: true,  
@@ -30,7 +30,7 @@ export function createWebView(
 
     } else {
 
-        webviewPanel.title = rank.item.name;
+        webviewPanel.title = "世界";
         webviewPanel.webview.html = getIframeHtml(rank.url);
     }
 

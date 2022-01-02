@@ -1,7 +1,6 @@
 import * as vscode from 'vscode';
 import { ITopStoriesArticle } from '../target/topStories'
 import { TopStories } from '../service/topstory.service';
-import * as os from 'os';
 
 
 export class TopStoriesTreeProvider implements vscode.TreeDataProvider<TopStoriesTreeItem> {
@@ -38,11 +37,6 @@ export class TopStoriesTreeProvider implements vscode.TreeDataProvider<TopStorie
       const treeNode: TopStoriesTreeItem = new TopStoriesTreeItem(article.title, [childNode]);
       treeNode.tooltip = `${article.title} - ${url}`;
       treeNode.description = `${url}`;
-      treeNode.command = {
-        command: 'hack-news.openArticle',
-        title: 'Open Article',
-        arguments: [url, article.id],
-      };
       tree.push(treeNode);
     
     }
@@ -61,10 +55,18 @@ export class TopStoriesTreeItem extends vscode.TreeItem {
 
   children?: TopStoriesTreeItem[];
 
-  get url(): string {
-    
-			return this.url;
-		
+  get url(): string {  
+			return "https://news.ycombinator.com/item?id=29663233";
   }
+
+  get command(): vscode.Command {
+		return {
+			command: "hacknews.treeItemClick",
+			title: '',
+			arguments: [                
+				this         
+			]
+		};
+	}
 }
 

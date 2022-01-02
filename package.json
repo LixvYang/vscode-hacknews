@@ -60,6 +60,10 @@
           "light": "res/media/light/refresh.svg",
           "dark": "res/media/dark/refresh.svg"
         }
+      },
+      {
+        "command": "hacknews.treeItemClick",
+        "title": "HackNews OpenWebView"
       }
     ],
     "menus": {
@@ -73,7 +77,7 @@
       "view/item/context": [
         {
           "command": "hacknews.treeItemClick",
-          "when": "view == hacknews-topStories && viewItem == vscode-hacknews"
+          "when": "view == hacknews-topStories"
         }
       ]
     }
